@@ -93,3 +93,49 @@ let app = new MyVue({
 
 // 将真实的dom解析为虚拟dom
 // 描述一个虚拟dom type、value、chiildren、data: 元素的属性
+// div => { tag: 'div' }
+// 文本几点 => { tag: undefined, value: '文本节点' }
+// <div class="a" /> 
+
+// 描述vnode的函数
+class VNnode {
+  constructor(tag, data, value, type){
+    this.tag = tag && tag.toLowerCase()
+    this.data = data 
+    this.value = value
+    this.type = type
+    this.children = []
+  }
+
+  appendChild(vnode){
+    this.children.push(vnode)
+  }
+}
+/**
+ * 使用递归从DOM生成Vnode
+ * vue源码中使用 栈结构来实现 vnode
+ */
+function creatVnode (node) {
+  let nodeType = node.nodeType
+  let _vnode= null
+  if(nodeType === 1){// 元素节点
+    let tag = node.nodeName
+    let attrs = node.attributes
+    let data = {}
+    for(let i = 0; i < attrs.length; i++ ){
+      data[attrs[i].nodeName] = attrs[i].nodeValue
+    }
+    _vnode = new VNnode(tag, data, undefined, nodeType)
+    // 考虑子元素
+    let childNodes = node.childNodes
+    for(let j = 0; j < childNodes.length; j++){
+      _vnode.appendChild(creatVnode(childNodes[j]))
+    }
+  }else if(nodeType === 3){// 文本节点
+    _vnode = new VNnode(undefined, undefined, node.nodeValue, nodeType)
+  }
+  return _vnode
+}
+
+let root = document.querySelector('#root')
+console.log(creatVnode(root))

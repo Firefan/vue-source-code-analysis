@@ -26,6 +26,7 @@ as repository name
 # 虚拟DOM和DOM
 
 1. 为什么要使用虚拟dom？？？ (使用虚拟dom是vue整个渲染跟新与数据追踪相关的)
+  提升性能
 
 2. 实现真实dom到虚拟dom
   1. 如何来描述一个dom：
