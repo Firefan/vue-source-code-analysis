@@ -139,3 +139,34 @@ function creatVnode (node) {
 
 let root = document.querySelector('#root')
 console.log(creatVnode(root))
+
+let fisrstVnode = creatVnode(root)
+
+// 算法： 从Vnode解析为NODE
+/**
+ * 将Vnode解析为真实的NODE
+ */
+function parseVnode(vnode){
+  let type = vnode.type
+  if( type === 1 ){
+    let _node = document.createElement(vnode.tag)
+
+    // 属性
+    Object.keys(vnode.data).map(key => {
+      _node.setAttribute( key, vnode.data[key])
+    })
+
+    // 子元素
+    vnode.children.forEach(child => {
+      let _childNode = parseVnode(child)
+      _node.appendChild(_childNode)
+    })
+    return _node
+  }else if(type === 3 ){
+    return document.createTextNode(vnode.value)
+  }
+  return realNode
+}
+
+let realNode = parseVnode(fisrstVnode)
+console.log(realNode)
