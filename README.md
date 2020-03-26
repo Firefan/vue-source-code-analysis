@@ -65,7 +65,8 @@ as repository name
 
 *所以，应该将AST缓存在内存中，只需要传入改变的量就好了*，函数柯里化在此派上用场
 
+## Object.defineProperty实现响应式
 
-
+1. Object.defineProperty是给对象的添加属性的函数
 
 

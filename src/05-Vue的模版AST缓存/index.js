@@ -105,7 +105,7 @@ function parseVnodeWithData (vnode, data) {
 }
 
 /**
- * 将Vnode解析为带{{xx}}的Vnode
+ * 将Vnode解析为真实的DOM
  */
 function parseVnodeToDOM(vnode){
   let type = vnode.type
