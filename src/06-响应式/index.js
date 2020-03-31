@@ -465,8 +465,6 @@ function parseVnodeToDOM(vnode){
 }
 
 
-let reguler = /\{\{(.+?)\}\}/g // 双花括号解析
-
 
 /**
  * 
