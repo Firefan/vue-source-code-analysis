@@ -36,7 +36,6 @@ myVue.prototype.createRender = function () {
   // Vue: 将AST + data => Vnode
   // 简化模型: 带有坑的Vnode + data => 含有数据的Vnode
   return function render () {
-    debugger
     return parseVnodeWithData(JSON.parse(JSON.stringify(ast)), this._data)
   }
 }
